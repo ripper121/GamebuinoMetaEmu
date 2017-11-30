@@ -130,8 +130,10 @@
             this.buttonSelect.Name = "buttonSelect";
             this.buttonSelect.Size = new System.Drawing.Size(46, 23);
             this.buttonSelect.TabIndex = 8;
-            this.buttonSelect.Text = "Select";
+            this.buttonSelect.Text = "C";
             this.buttonSelect.UseVisualStyleBackColor = true;
+            this.buttonSelect.MouseDown += new System.Windows.Forms.MouseEventHandler(this.buttonSelect_MouseDown);
+            this.buttonSelect.MouseUp += new System.Windows.Forms.MouseEventHandler(this.buttonSelect_MouseUp);
             // 
             // refreshTimer
             // 
@@ -153,6 +155,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.ClientSize = new System.Drawing.Size(315, 194);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.buttonSelect);
@@ -164,6 +167,8 @@
             this.Controls.Add(this.buttonD);
             this.Controls.Add(this.buttonU);
             this.Controls.Add(this.pictureBox1);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
+            this.MaximizeBox = false;
             this.Name = "Form1";
             this.Text = "Form1";
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
