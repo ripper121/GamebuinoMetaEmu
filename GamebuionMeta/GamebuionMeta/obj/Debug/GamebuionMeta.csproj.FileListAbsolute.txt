@@ -1,0 +1,9 @@
+c:\users\sts\documents\visual studio 2015\Projects\GamebuionMeta\GamebuionMeta\bin\Debug\GamebuionMeta.exe.config
+c:\users\sts\documents\visual studio 2015\Projects\GamebuionMeta\GamebuionMeta\bin\Debug\GamebuionMeta.exe
+c:\users\sts\documents\visual studio 2015\Projects\GamebuionMeta\GamebuionMeta\bin\Debug\GamebuionMeta.pdb
+c:\users\sts\documents\visual studio 2015\Projects\GamebuionMeta\GamebuionMeta\obj\Debug\GamebuionMeta.csprojResolveAssemblyReference.cache
+c:\users\sts\documents\visual studio 2015\Projects\GamebuionMeta\GamebuionMeta\obj\Debug\GamebuionMeta.Form1.resources
+c:\users\sts\documents\visual studio 2015\Projects\GamebuionMeta\GamebuionMeta\obj\Debug\GamebuionMeta.Properties.Resources.resources
+c:\users\sts\documents\visual studio 2015\Projects\GamebuionMeta\GamebuionMeta\obj\Debug\GamebuionMeta.csproj.GenerateResource.Cache
+c:\users\sts\documents\visual studio 2015\Projects\GamebuionMeta\GamebuionMeta\obj\Debug\GamebuionMeta.exe
+c:\users\sts\documents\visual studio 2015\Projects\GamebuionMeta\GamebuionMeta\obj\Debug\GamebuionMeta.pdb
