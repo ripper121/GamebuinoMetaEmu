@@ -40,6 +40,7 @@
             this.buttonSelect = new System.Windows.Forms.Button();
             this.refreshTimer = new System.Windows.Forms.Timer(this.components);
             this.label1 = new System.Windows.Forms.Label();
+            this.labelDebug = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -105,6 +106,8 @@
             this.buttonA.TabIndex = 5;
             this.buttonA.Text = "A";
             this.buttonA.UseVisualStyleBackColor = true;
+            this.buttonA.MouseDown += new System.Windows.Forms.MouseEventHandler(this.buttonA_MouseDown);
+            this.buttonA.MouseUp += new System.Windows.Forms.MouseEventHandler(this.buttonA_MouseUp);
             // 
             // buttonB
             // 
@@ -114,6 +117,8 @@
             this.buttonB.TabIndex = 6;
             this.buttonB.Text = "B";
             this.buttonB.UseVisualStyleBackColor = true;
+            this.buttonB.MouseDown += new System.Windows.Forms.MouseEventHandler(this.buttonB_MouseDown);
+            this.buttonB.MouseUp += new System.Windows.Forms.MouseEventHandler(this.buttonB_MouseUp);
             // 
             // buttonStart
             // 
@@ -123,6 +128,8 @@
             this.buttonStart.TabIndex = 7;
             this.buttonStart.Text = "Start";
             this.buttonStart.UseVisualStyleBackColor = true;
+            this.buttonStart.MouseDown += new System.Windows.Forms.MouseEventHandler(this.buttonStart_MouseDown);
+            this.buttonStart.MouseUp += new System.Windows.Forms.MouseEventHandler(this.buttonStart_MouseUp);
             // 
             // buttonSelect
             // 
@@ -151,12 +158,21 @@
             this.label1.TabIndex = 9;
             this.label1.Text = "GAMEBUINO meta";
             // 
+            // labelDebug
+            // 
+            this.labelDebug.Location = new System.Drawing.Point(12, 185);
+            this.labelDebug.Name = "labelDebug";
+            this.labelDebug.Size = new System.Drawing.Size(291, 22);
+            this.labelDebug.TabIndex = 10;
+            this.labelDebug.Text = "Debug";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.ClientSize = new System.Drawing.Size(315, 194);
+            this.ClientSize = new System.Drawing.Size(315, 208);
+            this.Controls.Add(this.labelDebug);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.buttonSelect);
             this.Controls.Add(this.buttonStart);
@@ -190,6 +206,7 @@
         private System.Windows.Forms.Button buttonSelect;
         private System.Windows.Forms.Timer refreshTimer;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label labelDebug;
     }
 }
 

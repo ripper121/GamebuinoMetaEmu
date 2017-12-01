@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Media;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -12,60 +13,87 @@ namespace GamebuionMeta
 {
     public partial class Form1 : Form
     {
-        const byte BTN_NONE = 0, BTN_A = 1, BTN_B = 2, BTN_C = 3, BTN_UP = 4, BTN_RIGHT = 5, BTN_DOWN = 6, BTN_LEFT = 7;
-        byte button = 0;
-        bool releaseButton = false;
-
+        ArduinoCode arduinoCode = new ArduinoCode();
+        bool[] buttons = new bool[7];
 
         private void buttonD_MouseDown(object sender, MouseEventArgs e)
         {
-            button = BTN_DOWN;
+            buttons[BTN_DOWN] = true;
         }
 
         private void buttonD_MouseUp(object sender, MouseEventArgs e)
         {
-            button = BTN_NONE;
+            buttons[BTN_DOWN] = false;
         }
 
         private void buttonL_MouseDown(object sender, MouseEventArgs e)
         {
-            button = BTN_LEFT;
+            buttons[BTN_LEFT] = true;
         }
 
         private void buttonL_MouseUp(object sender, MouseEventArgs e)
         {
-            button = BTN_NONE;
+            buttons[BTN_LEFT] = false;
         }
 
         private void buttonR_MouseDown(object sender, MouseEventArgs e)
         {
-            button = BTN_RIGHT;
+            buttons[BTN_RIGHT] = true;
         }
 
         private void buttonR_MouseUp(object sender, MouseEventArgs e)
         {
-            button = BTN_NONE;
+            buttons[BTN_RIGHT] = false;
         }
 
         private void buttonU_MouseDown(object sender, MouseEventArgs e)
         {
-            button = BTN_UP;
+            buttons[BTN_UP] = true; 
         }
 
         private void buttonU_MouseUp(object sender, MouseEventArgs e)
         {
-            button = BTN_NONE;
+            buttons[BTN_UP] = false;
         }
 
         private void buttonSelect_MouseDown(object sender, MouseEventArgs e)
         {
-            button = BTN_C;
+            buttons[BTN_C] = true;
         }
-
 
         private void buttonSelect_MouseUp(object sender, MouseEventArgs e)
         {
-            button = BTN_NONE;
+            buttons[BTN_C] = false;
+        }
+
+        private void buttonB_MouseDown(object sender, MouseEventArgs e)
+        {
+            buttons[BTN_B] = true;
+        }
+
+        private void buttonB_MouseUp(object sender, MouseEventArgs e)
+        {
+            buttons[BTN_B] = false;
+        }
+
+        private void buttonA_MouseDown(object sender, MouseEventArgs e)
+        {
+            buttons[BTN_A] = true;
+        }
+
+        private void buttonA_MouseUp(object sender, MouseEventArgs e)
+        {
+            buttons[BTN_A] = false;
+        }
+
+        private void buttonStart_MouseDown(object sender, MouseEventArgs e)
+        {
+
+        }
+
+        private void buttonStart_MouseUp(object sender, MouseEventArgs e)
+        {
+
         }
 
         const int WM_KEYDOWN = 0x100;
@@ -75,205 +103,122 @@ namespace GamebuionMeta
         {
             if (m.Msg == WM_KEYDOWN && (Keys)m.WParam == Keys.W)
             {
-                button = BTN_UP;
+                buttons[BTN_UP] = true;
             }
+            else if (m.Msg == WM_KEYUP && (Keys)m.WParam == Keys.W)
+            {
+                buttons[BTN_UP] = false;
+            }
+
             if (m.Msg == WM_KEYDOWN && (Keys)m.WParam == Keys.A)
             {
-                button = BTN_LEFT;
+                buttons[BTN_LEFT] = true;
             }
+            else if (m.Msg == WM_KEYUP && (Keys)m.WParam == Keys.A)
+            {
+                buttons[BTN_LEFT] = false;
+            }
+
             if (m.Msg == WM_KEYDOWN && (Keys)m.WParam == Keys.S)
             {
-                button = BTN_DOWN;
+                buttons[BTN_DOWN] = true;
             }
+            else if (m.Msg == WM_KEYUP && (Keys)m.WParam == Keys.S)
+            {
+                buttons[BTN_DOWN] = false;
+            }
+
             if (m.Msg == WM_KEYDOWN && (Keys)m.WParam == Keys.D)
             {
-                button = BTN_RIGHT;
+                buttons[BTN_RIGHT] = true;
             }
+            else if (m.Msg == WM_KEYUP && (Keys)m.WParam == Keys.D)
+            {
+                buttons[BTN_RIGHT] = false;
+            }
+
             if (m.Msg == WM_KEYDOWN && (Keys)m.WParam == Keys.Space)
             {
-                button = BTN_A;
+                buttons[BTN_A] = true;
             }
+            else if (m.Msg == WM_KEYUP && (Keys)m.WParam == Keys.Space)
+            {
+                buttons[BTN_A] = false;
+            }
+
             if (m.Msg == WM_KEYDOWN && (Keys)m.WParam == Keys.LShiftKey)
             {
-                button = BTN_B;
+                buttons[BTN_B] = true;
             }
+            else if (m.Msg == WM_KEYUP && (Keys)m.WParam == Keys.LShiftKey)
+            {
+                buttons[BTN_B] = false;
+            }
+
             if (m.Msg == WM_KEYDOWN && (Keys)m.WParam == Keys.C)
             {
-                button = BTN_C;
+                buttons[BTN_C] = true;
             }
-            else if (m.Msg == WM_KEYUP)
+            else if (m.Msg == WM_KEYUP && (Keys)m.WParam == Keys.C)
             {
-                button = BTN_NONE;
+                buttons[BTN_C] = false;
             }
 
             return base.ProcessKeyPreview(ref m);
         }
 
+        public const int LCDWIDTH = Gamebuino.LCDWIDTH;
+        public const int LCDHEIGHT = Gamebuino.LCDHEIGHT;
+
+        public const int BTN_UP_PIN = 1;
+        public const int BTN_UP = 1;
+
+        public const int BTN_RIGHT_PIN = 2;
+        public const int BTN_RIGHT = 2;
+
+        public const int BTN_DOWN_PIN = 3;
+        public const int BTN_DOWN = 3;
+
+        public const int BTN_LEFT_PIN = 0;
+        public const int BTN_LEFT = 0;
+
+        public const int BTN_A_PIN = 4;
+        public const int BTN_A = 4;
+
+        public const int BTN_B_PIN = 5;
+        public const int BTN_B = 5;
+
+        public const int BTN_C_PIN = 6;
+        public const int BTN_C = 6;
+
         public Form1()
         {
             InitializeComponent();
+            arduinoCode.setup();
+            for (byte i = 0; i < 7; i++)
+                buttons[i] = false;
         }
+
+        bool toggle = false;
 
         private void refreshTimer_Tick(object sender, EventArgs e)
         {
+            refreshTimer.Interval = 1000/ arduinoCode.gb.gbFPS;
 
-            refreshTimer.Interval = 1000/gbFPS;
-            pictureBox1.Image = gb.display.getBuffer();
+            pictureBox1.Image = arduinoCode.gb.display.getBuffer();
             pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
             pictureBox1.Refresh();
-            gb.buttons.tempButton = button;
-            loop();
+            arduinoCode.gb.buttons.tempButtons = buttons;
+            if (toggle)
+            {
+                labelDebug.Text = "*";                
+            }
+            else
+            {
+                labelDebug.Text = " ";
+            }
+            toggle = !toggle;
+            arduinoCode.loop();
         }
-
-
-
-
-
-
-        /// <summary>
-        /// Gamebuino API Start
-        /// </summary>
-        ///
-        const int gbFPS = 60; // Gamebuino Meta FPS
-        const int LCDWIDTH = 160;
-        const int LCDHEIGHT = 128;
-
-        class Buttons
-        {
-            public byte tempButton = 0;
-            public bool pressed(int button)
-            {
-                if (button == tempButton)
-                    return true;
-                return false;
-            }
-        };
-
-        class Display
-        {
-            private Bitmap Screen = new Bitmap(LCDWIDTH + 1, LCDHEIGHT + 1);
-            public void drawPixel(int x, int y, Color color)
-            {
-                Screen.SetPixel(x, y, color);
-            }
-
-            public Color getPixel(int x, int y)
-            {
-                return Screen.GetPixel(x, y);
-            }
-
-            public Bitmap getBuffer()
-            {
-                return Screen;
-            }
-
-            public void clear()
-            {
-                Graphics g = Graphics.FromImage(Screen);
-                g.Clear(Color.Black);
-            }
-
-            public void fillScreen(Color color)
-            {
-                Graphics g = Graphics.FromImage(Screen);
-                g.Clear(color);
-            }
-
-            public void drawLine(int x0, int y0, int x1, int y1, int width, Color color)
-            {
-                Graphics g = Graphics.FromImage(Screen);
-                Pen myPen = new Pen(color);
-                myPen.Width = width;
-                g.DrawLine(myPen, new Point(x0, y0), new Point(x1, y1));
-            }
-
-            public void drawFastVLine(int x, int y, int h, Color color)
-            {
-                Graphics g = Graphics.FromImage(Screen);
-                Pen myPen = new Pen(color);
-                myPen.Width = h;
-                g.DrawLine(myPen, new Point(x, y), new Point(x, LCDHEIGHT));
-            }
-
-            public void drawFastHLine(int x, int y,int w, Color color)
-            {
-                Graphics g = Graphics.FromImage(Screen);
-                Pen myPen = new Pen(color);
-                myPen.Width = w;
-                g.DrawLine(myPen, new Point(x, y), new Point(LCDWIDTH, y));
-            }
-
-        };
-
-        class Gamebuino
-        {
-            public Buttons buttons = new Buttons();
-            public Display display = new Display();
-            public void begin() { }
-            public bool update() { return true; }
-        };
-        /// <summary>
-        /// Gamebuino API END
-        /// </summary>
-        ///
-
-
-
-        /// <summary>
-        /// Your Arduino Code Here
-        /// </summary>
-        ///
-        Gamebuino gb = new Gamebuino();
-
-        int x = 0, y = 0;
-
-        void setup()
-        {
-            gb.begin();
-        }
-
-        void loop()
-        {
-            if (gb.update())
-            {
-                if (x >= LCDWIDTH)
-                    x = LCDWIDTH;
-                if (x <= 0)
-                    x = 0;
-
-                if (y >= LCDHEIGHT)
-                    y = LCDHEIGHT;
-                if (y <= 0)
-                    y = 0;
-
-                if (gb.buttons.pressed(BTN_UP))
-                {
-                    gb.display.drawPixel(x, y--, Color.Red);
-                }
-
-                if (gb.buttons.pressed(BTN_DOWN))
-                {
-                    gb.display.drawPixel(x, y++, Color.Red);
-                }
-
-                if (gb.buttons.pressed(BTN_LEFT))
-                {
-                    gb.display.drawPixel(x--, y, Color.Red);
-                }
-
-                if (gb.buttons.pressed(BTN_RIGHT))
-                {
-                    gb.display.drawPixel(x++, y, Color.Red);
-                }
-
-                if (gb.buttons.pressed(BTN_C))
-                {
-                    gb.display.fillScreen(Color.Black);
-                }
-            }
-        }
-        /// <summary>
-        /// End of Arduino Code
-        /// </summary>
     }
 }
